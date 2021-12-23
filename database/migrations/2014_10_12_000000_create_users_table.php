@@ -27,8 +27,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             // Tipo de usuario 'type_user'
-            $table->string('type_user');
-            $table->string('address');
+            $table->string('type_user')->default('tutor');
             $table->string('password');
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();

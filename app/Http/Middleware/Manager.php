@@ -3,10 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Auth;
 use Illuminate\Http\Request;
 
-class Tutor
+class Manager
 {
     /**
      * Handle an incoming request.
@@ -17,10 +16,10 @@ class Tutor
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->type_user == 'tutor') {
+        if (Auth::user()->type_user == 'manager') {
             return $next($request);
         }else{
-            return abort(403, 'No eres un acudiente, padre o madre, por lo cual no tienes permiso para estar en esta pagina');
+            return abort(403, '¡No eres un organizador de rutas no puedes estar aqui!');
         }
     }
 }

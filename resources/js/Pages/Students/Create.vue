@@ -1,7 +1,7 @@
 <template>
     <app-layout title="Estudiantes">
         <template #header>
-            <h2 class="py-2 font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Estudiantes 
             </h2>
         </template>
@@ -11,8 +11,8 @@
                 <div class="md:grid md:grid-cols-3 md:gap-6">
                     <div class="md:col-span-1 mb-3">
                         <div class="px-4 sm:px0">
-                            <h3 class="text-lg text-gray-900">Editar Información del Estudiante</h3>
-                            <p class="text-sm text-gray-600">Se puede editar la información del estudiante</p>
+                            <h3 class="text-lg text-gray-900">Crear estudiante</h3>
+                            <p class="text-sm text-gray-600">Ingresa la información del estudiante que quieres inscribir</p>
                             <div class="mt-3">
                                 <Link class="mt-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" :href="route('students.index')">Volver</Link>
                             </div>
@@ -73,9 +73,8 @@
                                    <option value="afternoon">Tarde</option>
                                    <option value="all_day">Única</option>
                                </select>  
-                                <div class="btn-file flex justify-between">
-                                    <button class="place-content-center cursor-pointer mt-4 bg-yellow-300 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded">Editar</button>
-                                    <a href="#" @click.prevent="destroy" class="place-content-center cursor-pointer mt-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Borrar</a>
+                                <div class="btn-file flex">
+                                    <button class="mx-auto place-content-center cursor-pointer mt-4 bg-yellow-300 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded">Agregar</button>
                               </div>                                                                                           
                             </form>
                         </div>
@@ -97,27 +96,27 @@
             Link,
         },
         props: {
-            student: Object,
             schools: Array,
         },
         data() {
             return {
                 form: {
-                    names: this.student.names,
-                    surnames: this.student.surnames,
-                    type_id: this.student.type_id,
-                    dni: this.student.dni,
-                    gender: this.student.gender,
-                    birth_date: this.student.birth_date,
-                    address: this.student.address,
-                    school: this.student.school.id,
-                    course: this.student.course,
-                    grade: this.student.grade,
-                    session: this.student.session,
-                    image: this.student.image 
+                    names: '',
+                    surnames: '',
+                    type_id: 'TI',
+                    dni: '',
+                    gender: 'male',
+                    birth_date: '2005-01-01',
+                    address: '',
+                    school: '',
+                    course: '',
+                    grade: 'Primero',
+                    session: 'morning',
+                    image: '' 
                 },
-                urlImage: '../../storage/' + this.student.image,
+                urlImage: '../../storage/students/default.jpg',
                 gradesNames: ['Primero', 'Segundo', 'Tercero', 'Cuarto', 'Quinto', 'Sexto', 'Séptimo', 'Octavo', 'Noveno', 'Décimo', 'Once'],
+                levelEducative: ['Primaria', 'Secundaria', 'Media']
             }
         },
         methods: {
@@ -126,27 +125,7 @@
                 this.urlImage = URL.createObjectURL(file);
             },
             submit(){
-                this.$inertia.post(this.route('students.update', this.student.id),
-                {
-                    _method: 'put',
-                    names: this.form.names,
-                    surnames: this.form.surnames,
-                    type_id: this.form.type_id,
-                    dni: this.form.dni,
-                    gender: this.form.gender,
-                    birth_date: this.form.birth_date,
-                    address: this.form.address,
-                    school: this.form.school,
-                    course: this.form.course,
-                    grade: this.form.grade,
-                    session: this.form.session,
-                    image: this.form.image 
-                });
-            },
-            destroy() {
-                if (confirm('Desea eliminar a este estudiante?')) {
-                    this.$inertia.delete(this.route('students.destroy', this.student.id))
-                }
+                this.$inertia.post(this.route('students.store'), this.form)
             }
         }
     })

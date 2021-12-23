@@ -1,7 +1,7 @@
 <template>
     <app-layout title="Estudiantes">
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="py-2 font-semibold text-xl text-gray-800 leading-tight">
                 Estudiantes 
             </h2>
         </template>
@@ -21,7 +21,7 @@
                     <div class="md:col-span-2">
                         <!-- Profile Card -->
                         <div class="md:rounded-lg shadow-lg bg-gray-600 w-full flex flex-row flex-wrap p-3 antialiased" style="
-                          background-image: url('https://images.unsplash.com/photo-1578836537282-3171d77f8632?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80');
+                          background-image: url('../../storage/images/chia-back.jpg');
                           background-repeat: no-repat;
                           background-size: cover;
                           background-blend-mode: multiply;

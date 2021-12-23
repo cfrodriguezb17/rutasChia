@@ -10,9 +10,11 @@ class Student extends Model
     use HasFactory;
     // Relaciones
     protected $fillable = [
+        'user',
+        'ride',
         'names',
         'surnames',
-        'typeId',
+        'type_id',
         'dni',
         'gender',
         'birth_date',

@@ -43,7 +43,12 @@ class DatabaseSeeder extends Seeder
         ]);
         User::factory(5)->create();
         Car::factory(5)->create();
-        Ride::factory(5)->create();
+        DB::table('rides')->insert([
+            'user' => '1', 
+            'car' => '1',
+            'number' => 'No se le ha asignado una ruta',
+        ]);
+        Ride::factory(4)->create();
         //School::factory(3)->create();
         Student::factory(10)->create();
     }

@@ -17,8 +17,8 @@ class CreateStudentsTable extends Migration
             $table->id();
 
             // Acudiente del estudiante = 'user'
-            $table->unsignedBigInteger('user');
-            $table->unsignedBigInteger('ride');
+            $table->unsignedBigInteger('user')->nullable();
+            $table->unsignedBigInteger('ride')->nullable();
             $table->unsignedBigInteger('school');
 
             $table->string('names');
@@ -32,7 +32,7 @@ class CreateStudentsTable extends Migration
             $table->string('grade');
             $table->string('course');
             $table->string('session');
-            $table->string('education');
+            $table->string('education')->nullable();
             $table->string('address');
             $table->string('image')->default('students/default.jpg');
             

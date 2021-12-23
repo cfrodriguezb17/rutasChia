@@ -18,4 +18,5 @@ use Inertia\Inertia;
 Route::view('/', 'index');
 Route::get('dashboard', [App\Http\Controllers\PageController::class, 'dashboard'])->middleware('auth:sanctum')->name('dashboard');
 Route::resource('students', App\Http\Controllers\StudentController::class)->middleware(['auth:sanctum', 'tutor']);
+Route::resource('rides', App\Http\Controllers\RideController::class)->middleware(['auth:sanctum']);
 

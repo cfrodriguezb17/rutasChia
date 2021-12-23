@@ -33,6 +33,8 @@ class StudentController extends Controller
     public function create()
     {
         //
+        $schools = DB::table('schools')->get(['id', 'name']);
+        return Inertia::render('Students/Create', compact('schools'));
     }
 
     /**
@@ -44,6 +46,35 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         //
+        $id_user = Auth::user()->id;
+        $request->request->add(['user' => $id_user]);
+        $request->request->add(['ride' => '1']);
+        $request->validate([
+            'names' => 'required',
+            'surnames' => 'required',
+        ]);
+        $student = Student::create($request->only(
+        'user',
+        'ride',
+        'names',
+        'surnames',
+        'type_id',
+        'dni',
+        'gender',
+        'birth_date',
+        'school',
+        'course',
+        'grade',
+        'session',
+        'address',
+        ));
+
+        if($request->file('image')){
+            $student->image = $request->file('image')->store('students', 'public');
+            $student->save();
+        }
+
+        return redirect()->route('students.edit', $student->id);
     }
 
     /**
@@ -85,14 +116,14 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-       /* $request->validate([
+        $request->validate([
             'names' => 'required',
             'surnames' => 'required',
         ]);
         $student->update($request->only(
         'names',
         'surnames',
-        'typeId',
+        'type_id',
         'dni',
         'gender',
         'birth_date',
@@ -101,14 +132,11 @@ class StudentController extends Controller
         'grade',
         'session',
         'address'
-        ));*/
+        ));
         // Image
         if($request->file('image')){
-            //$student->updateProfilePhoto(request()->file('image'));
-            //dd($student->image);
             $student->image = $request->file('image')->store('students', 'public');
             $student->save();
-            dd($student->image);
         }
         return redirect()->route('students.index');
 
@@ -123,5 +151,7 @@ class StudentController extends Controller
     public function destroy(Student $student)
     {
         //
+        $student->delete();
+        return redirect()->route('students.index');
     }
 }

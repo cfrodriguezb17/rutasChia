@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use Inertia\Inertia;
 use App\Models\Ride;
 use Illuminate\Http\Request;
 
@@ -15,6 +17,9 @@ class RideController extends Controller
     public function index()
     {
         //
+        return Inertia::render('Rides/Index', [
+            'rides' => Ride::where('user')->latest()->get()
+        ]);
     }
 
     /**

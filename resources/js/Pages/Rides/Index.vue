@@ -3,9 +3,9 @@
         <template #header>
             <div class="flex justify-between items-center">                
             <h2 class="py-2 font-semibold text-xl text-gray-800 leading-tight">
-                Estudiantes 
+               Rutas 
             </h2>
-            <Link class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" :href="route('students.create')">Añadir estudiante</Link>
+            <Link class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" :href="route('rides.create')">Formar Ruta</Link>
             </div>
         </template>
 
@@ -20,7 +20,7 @@
                     </div>
                     <div class="md:col-span-2 mt-5 md:mt-0">
                         <div class="shadow bg-white md:rounded-md md:p-4">
-                            <table class="w-full">
+<!--                             <table class="w-full">
                                 <tr v-for="student in students">
                                     <td class="border p-4 py-2">
                                         {{ student.names }}
@@ -39,7 +39,7 @@
                                         </Link>
                                     </td>                                                                
                                 </tr>
-                            </table>
+                            </table> -->
                         </div>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
             Link
         },
         props: {
-            students: Array,
+            rides: Array,
         }
     })
 </script>

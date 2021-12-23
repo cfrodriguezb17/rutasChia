@@ -1,5 +1,5 @@
 <template>
-    <Head title="Register" />
+    <Head title="Registrarse" />
 
     <jet-authentication-card>
         <template #logo>
@@ -10,8 +10,44 @@
 
         <form @submit.prevent="submit">
             <div>
-                <jet-label for="name" value="Name" />
-                <jet-input id="name" type="text" class="mt-1 block w-full" v-model="form.name" required autofocus autocomplete="name" />
+                <jet-label for="names" value="Nombres" />
+                <jet-input id="names" type="text" class="mt-1 block w-full" v-model="form.names" required autofocus autocomplete="given-name" />
+            </div>
+
+            <div class="mt-4">
+                <jet-label for="surnames" value="Apellidos" />
+                <jet-input id="surnames" type="text" class="mt-1 block w-full" v-model="form.surnames" required autofocus autocomplete="family-name" />
+            </div>
+
+            <div class="mt-4">
+                <jet-label for="type_id" value="Tipo de Identificación" />
+                <select id="type_id" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full" v-model="form.type_id">
+                    <option value="CC">Cédula de Ciudadanía</option>
+                    <option value="CE">Cédula de Extranjería</option>
+                </select>
+            </div>
+
+            <div class="mt-4">
+                <jet-label for="dni" value="Numero de Identificación" />
+                <jet-input id="dni" type="number" class="mt-1 block w-full" v-model="form.dni" required autofocus autocomplete="dni" />
+            </div>
+
+            <div class="mt-4">
+                <jet-label for="birth_date" value="Fecha de Nacimiento" />
+                <jet-input id="birth_date" type="date" class="mt-1 block w-full" v-model="form.birth_date" required autofocus autocomplete="bday" />
+            </div>
+
+            <div class="mt-4">
+                <jet-label for="gender" value="Genero" />
+                <select id="gender" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full" v-model="form.gender">
+                    <option value="male">Masculino</option>
+                    <option value="female">Femenino</option>
+                </select>
+            </div>
+
+            <div class="mt-4">
+                <jet-label for="phone" value="Numero Celular" />
+                <jet-input id="phone" type="number" class="mt-1 block w-full" v-model="form.phone" required autofocus autocomplete="tel-national" />
             </div>
 
             <div class="mt-4">
@@ -20,12 +56,12 @@
             </div>
 
             <div class="mt-4">
-                <jet-label for="password" value="Password" />
+                <jet-label for="password" value="Contraseña" />
                 <jet-input id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="new-password" />
             </div>
 
             <div class="mt-4">
-                <jet-label for="password_confirmation" value="Confirm Password" />
+                <jet-label for="password_confirmation" value="Confirmar Contraseña" />
                 <jet-input id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" required autocomplete="new-password" />
             </div>
 
@@ -42,12 +78,10 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <Link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    Already registered?
-                </Link>
+                <Link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900">¿Ya estas registrado? ¡Ingresa!</Link>
 
                 <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Register
+                    Registrarse  
                 </jet-button>
             </div>
         </form>
@@ -81,7 +115,13 @@
         data() {
             return {
                 form: this.$inertia.form({
-                    name: '',
+                    names: '',
+                    surnames: '',
+                    type_id: 'CC',
+                    dni: '',
+                    birth_date: '1990-01-01',
+                    gender: 'male',
+                    phone: '',
                     email: '',
                     password: '',
                     password_confirmation: '',
