@@ -8,6 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Ride extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'user',
+        'number',
+        'session',
+        'sector',
+        'school',
+        'car',
+    ];
     // Relaciones
     public function students()
     {
@@ -15,14 +23,14 @@ class Ride extends Model
     }
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user', 'id');
     }
     public function car()
     {
-        return $this->belongsTo(Car::class);
+        return $this->belongsTo(Car::class, 'car', 'id');
     }
-    public function schools()
+    public function school()
     {
-        return $this->hasMany(School::class);
+        return $this->belongsTo(School::class, 'school', 'id');
     }
 }

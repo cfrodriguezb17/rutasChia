@@ -19,12 +19,15 @@
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
+<!--                                 <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
-                                </jet-nav-link>
+                                </jet-nav-link> -->
                                 <jet-nav-link :href="route('students.index')" :active="route().current('students.*')">
                                     Estudiantes 
-                                </jet-nav-link>                                
+                                </jet-nav-link>      
+                                <jet-nav-link :href="route('rides.index')" :active="route().current('rides.*')">
+                                    Rutas 
+                                </jet-nav-link>                          
                             </div>
                         </div>
 
@@ -145,12 +148,15 @@
                 <!-- Responsive Navigation Menu -->
                 <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
                     <div class="pt-2 pb-3 space-y-1">
-                        <jet-responsive-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
+<!--                         <jet-responsive-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
-                        </jet-responsive-nav-link>
+                        </jet-responsive-nav-link> -->
                         <jet-responsive-nav-link :href="route('students.index')" :active="route().current('students.*')">
                             Estudiantes 
-                        </jet-responsive-nav-link>                        
+                        </jet-responsive-nav-link> 
+                        <jet-responsive-nav-link :href="route('rides.index')" :active="route().current('rides.*')">
+                            Rutas 
+                        </jet-responsive-nav-link>                       
                     </div>
 
                     <!-- Responsive Settings Options -->

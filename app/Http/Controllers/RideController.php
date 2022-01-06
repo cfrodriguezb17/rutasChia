@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Auth;
 use Inertia\Inertia;
+use App\Models\User;
 use App\Models\Ride;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RideController extends Controller
 {
@@ -17,9 +19,11 @@ class RideController extends Controller
     public function index()
     {
         //
-        return Inertia::render('Rides/Index', [
-            'rides' => Ride::where('user')->latest()->get()
-        ]);
+        $id_user = Auth::user()->id;
+        $cars = DB::table('cars')->where('user', $id_user)->get();
+        $rides = Ride::where('user', $id_user)->latest()->get();
+        $rides->load('school');
+        return Inertia::render('Rides/Index', compact('rides', 'cars'));
     }
 
     /**
@@ -30,6 +34,10 @@ class RideController extends Controller
     public function create()
     {
         //
+        $id_user = Auth::user()->id;
+        $schools = DB::table('schools')->get(['id', 'name']);
+        $cars = DB::table('cars')->where('user', $id_user)->get();
+        return Inertia::render('Rides/Create', compact('schools', 'cars'));
     }
 
     /**
@@ -41,6 +49,21 @@ class RideController extends Controller
     public function store(Request $request)
     {
         //
+        $id_user = Auth::user()->id;
+        $request->request->add(['user' => $id_user]);
+        $request->validate([
+            'number' => 'required',
+            'session' => 'required',
+        ]);
+        $ride = Ride::create($request->only(
+        'user',
+        'number',
+        'session',
+        'sector',
+        'school',
+        'car',
+        ));
+        return redirect()->route('rides.index');
     }
 
     /**
@@ -52,6 +75,10 @@ class RideController extends Controller
     public function show(Ride $ride)
     {
         //
+        $ride->load('user');
+        $ride->load('car');
+        $ride->load('school');
+        return Inertia::render('Rides/Show', compact('ride'));
     }
 
     /**
@@ -63,6 +90,10 @@ class RideController extends Controller
     public function edit(Ride $ride)
     {
         //
+        $id_user = Auth::user()->id;
+        $schools = DB::table('schools')->get(['id', 'name']);
+        $cars = DB::table('cars')->where('user', $id_user)->get();
+        return Inertia::render('Rides/Edit', compact('ride', 'schools', 'cars'));
     }
 
     /**
@@ -75,6 +106,19 @@ class RideController extends Controller
     public function update(Request $request, Ride $ride)
     {
         //
+        $request->validate([
+            'number' => 'required',
+            'session' => 'required',
+        ]);
+        $ride->update($request->only(
+        'user',
+        'number',
+        'session',
+        'sector',
+        'school',
+        'car',
+        ));
+        return redirect()->route('rides.index');
     }
 
     /**
@@ -86,5 +130,7 @@ class RideController extends Controller
     public function destroy(Ride $ride)
     {
         //
+        $ride->delete();
+        return redirect()->route('rides.index');
     }
 }

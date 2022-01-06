@@ -112,7 +112,7 @@
                     course: '',
                     grade: 'Primero',
                     session: 'morning',
-                    image: '' 
+                    image: 'students/default.jpg' 
                 },
                 urlImage: '../../storage/students/default.jpg',
                 gradesNames: ['Primero', 'Segundo', 'Tercero', 'Cuarto', 'Quinto', 'Sexto', 'Séptimo', 'Octavo', 'Noveno', 'Décimo', 'Once'],

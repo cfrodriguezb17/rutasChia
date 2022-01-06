@@ -11,7 +11,7 @@ class School extends Model
     // Relaciones
     public function rides()
     {
-        return $this->hasMany(Ride::class);
+        return $this->hasMany(Ride::class, 'school', 'id');
     }
     public function students()
     {

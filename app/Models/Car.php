@@ -9,12 +9,20 @@ class Car extends Model
 {
     use HasFactory;
     // Relaciones
+    protected $fillable = [
+        'user',
+        'brand',
+        'mob',
+        'year',
+        'company',
+        'image',
+    ];
     public function rides()
     {
-        return $this->hasMany(Ride::class);
+        return $this->hasMany(Ride::class, 'id', 'car');
     }
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user', 'id');
     }
 }

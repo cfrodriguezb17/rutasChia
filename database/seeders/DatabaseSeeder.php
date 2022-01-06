@@ -47,6 +47,9 @@ class DatabaseSeeder extends Seeder
             'user' => '1', 
             'car' => '1',
             'number' => 'No se le ha asignado una ruta',
+            'school' => '1',
+            'sector' => 'Bojaca',
+            'session' => 'morning'
         ]);
         Ride::factory(4)->create();
         //School::factory(3)->create();

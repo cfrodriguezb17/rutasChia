@@ -23,8 +23,9 @@ class CreateCarsTable extends Migration
             // Modelo de la marca = mob
             $table->string('mob');
             $table->string('year');
-            $table->string('plate');
+            $table->string('plate')->default('ABC123');
             $table->string('company');
+            $table->string('image')->default('cars/default-car.jpg');
 
             $table->timestamps();
             $table->foreign('user')->references('id')->on('users');

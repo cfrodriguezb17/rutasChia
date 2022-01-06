@@ -19,14 +19,18 @@ class CreateRidesTable extends Migration
             // Representante de la ruta = 'user' 
             $table->unsignedBigInteger('user');
             $table->unsignedBigInteger('car');
+            $table->unsignedBigInteger('school');
 
             // Numero de la ruta = 'number'
             $table->string('number');
+            $table->string('sector');
+            $table->string('session');
 
             $table->timestamps();
 
             $table->foreign('user')->references('id')->on('users');
             $table->foreign('car')->references('id')->on('cars');
+            $table->foreign('school')->references('id')->on('schools');
 
         });
     }

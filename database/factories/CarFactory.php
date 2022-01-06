@@ -15,11 +15,6 @@ class CarFactory extends Factory
     {
         return [
             //
-            /*$table->string('brand');
-            $table->string('model_of_brand');
-            $table->string('year');
-            $table->string('plate');
-            $table->string('company');*/
             'user' => rand(1,5),
             'brand' => $this->faker->jobTitle(),
             'mob' => $this->faker->streetName(),
